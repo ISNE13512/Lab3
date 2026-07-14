@@ -1,5 +1,6 @@
 #include <queue>
 #include <stack>
+#include <iostream>
 using namespace std;
 
 #ifndef Binary_Search_Tree
@@ -50,13 +51,24 @@ void Tree<T>::clear(Node<T> *p)
 
 template<class T>
 void Tree<T>::inorder(Node<T> *p) {
-	//TO DO! This is for an inorder tree traversal!
+
+	if (p != 0) {
+		inorder(p->left);
+		p->key.print();
+		cout << endl;
+		inorder(p->right);
+	}
 }
 
 template<class T>
 void Tree<T>::insert(const T &el) {
 	Node<T> *p = root, *prev = 0;
 	while (p != 0) {
+
+		if (p->key == el) {
+			p->key.merge(el);
+			return;
+		}
 		prev = p;
 		if (p->key < el)
 			p = p->right;
@@ -110,7 +122,7 @@ void Tree<T>::deleteNode(Node<T> *&node) {
 			prev->left = tmp->left;
 		else prev->right = tmp->left;
 	}
-	delete tmp;
+	delete tmp;a
 }
 
 #endif // Binary_Search_Tree
